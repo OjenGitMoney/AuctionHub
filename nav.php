@@ -40,7 +40,7 @@
               <li><a href="postitem.html/<?php  ?>">Sell an Item</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="myaccount.html/php">My Account</a></li>
+              <li><a href="myaccount.php">My Account</a></li>
           </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="login.php">Log-Out</a></li>
@@ -82,7 +82,7 @@ else
               <li><a href="postitem.html/<?php  ?>">Sell an Item</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="myaccount.html/php">My Account</a></li>
+              <li><a href="myaccount.php">My Account</a></li>
           </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="login.php">Log-In</a></li>

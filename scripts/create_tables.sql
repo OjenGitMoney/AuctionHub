@@ -12,7 +12,7 @@ CREATE TABLE items	(
 				post_date DATE NOT NULL WITH DEFAULT CURRENT DATE,
 				post_time TIME NOT NULL WITH DEFAULT CURRENT TIME,
 				end_date DATE,
-				image CLOB(5242880),
+				image VARCHAR(256),
 				condition CHAR(10),
 				poster_email VARCHAR(50),
 				winner_email VARCHAR(25),
