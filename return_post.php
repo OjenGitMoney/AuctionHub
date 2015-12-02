@@ -16,7 +16,7 @@
             $quality = $_POST['quality'];
             $img = $_POST['img_upload'];
             
-            $insertsql = "INSERT INTO OWNER.USERS (item, description, price, quality, image) VALUES ($item,
+            $insertsql = "INSERT INTO ".$computerUserName.".USERS (item, description, price, quality, image) VALUES ($item,
                 $description, $price, $quality, $img)";
             $stmt = db2_prepare($conn, $insertsql);
 

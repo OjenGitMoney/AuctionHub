@@ -10,7 +10,7 @@ if( isset($_POST['username'])){
 
 		$userName = $_POST['username'];
 
-		$userNameQuery = "SELECT COUNT(*) FROM OWNER.USERS WHERE email = '$userName' ";
+		$userNameQuery = "SELECT COUNT(*) FROM ".$computerUserName.".USERS WHERE email = '$userName' ";
 		
 		$stmt = db2_prepare($conn, $userNameQuery);
             

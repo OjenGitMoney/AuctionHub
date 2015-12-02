@@ -6,14 +6,14 @@ session_start();
 include 'connect.php';
 
 	if( isset($_POST['userName']) && isset($_POST['password']) ){
-			
+			console.log("YES");
 			$usernameEntered = $_POST['userName'];
 			$passwordEntered = $_POST['password'];
 
 
 				$conn = db2_connect( $database , $dbusername , $dbpassword );
 								
-				$sqlquery = "SELECT password FROM OWNER.USERS WHERE email = '$usernameEntered' ";
+				$sqlquery = "SELECT password FROM USERS WHERE email = '$usernameEntered' ";
 				$stmt = db2_prepare($conn, $sqlquery);
             	
             	if ($stmt) {       
@@ -36,7 +36,7 @@ include 'connect.php';
 
 							$_SESSION['username'] = $usernameEntered;
 							
-							header('Location: nav.php');
+							header('Location: index.php');
 							
 							}
 

@@ -76,13 +76,13 @@ else
     <!-- Collection of nav links and other content for toggling //   class="active"  -->
       <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-                <li><a href="Home.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
             </ul>
             <ul class="nav navbar-nav">
               <li><a href="postitem.html/<?php  ?>">Sell an Item</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="myaccount.html/php">My Account</a></li>
+              <li><a href="myaccount.php">My Account</a></li>
           </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="login.php">Log-In</a></li>
@@ -93,7 +93,7 @@ else
     <center>
     <ul class="search_bar">
     <form method="post" action="search.php">
-    <input type="text" name="searchterm" placeholder="search for item..." required><input type="button" value="search" name="Search">
+    <input type="text" name="searchterm" placeholder="search for item..." required><input type="submit" value="search" name="Search">
     </form>
     </ul>
     </center>
