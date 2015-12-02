@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include 'config.php';
 
 if( isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['username']) && isset($_POST['password']) ){

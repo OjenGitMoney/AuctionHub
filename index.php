@@ -1,18 +1,14 @@
 <?php
 
-require_once('config.php');
-require_once('nav.php');
+require ('config.php');
+require ('nav.php');
 $connection = db2_connect($dbname, $username, $password);
+
 if(!$connection){
     die('Not connected : '.db2_conn_error());
 }
 ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>AuctionHub</title>

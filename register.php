@@ -25,26 +25,58 @@ include 'nav.php';
         width: 100px;
     }
 
+    .effect
+        {
+            width: 700px;
+            height: 300px;
+            position: relative;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            border-radius: 10px;
+            left:25%;
+        
+            
+        }
+        .effect:before, .effect:after
+        {
+            content:"";
+            position:relative; 
+            z-index:-1;
+            box-shadow:0 0 20px rgba(0,0,0,0.8);
+            top:0;
+            bottom:0;
+            left:1px;
+            right:1px;
+            border-radius: 10px;
+        } 
+        .effect:after
+        {
+            right:10px; 
+            left:auto; 
+            transform:skew(8deg) rotate(3deg);
+            border-radius: 10px;
+        }
+
 </style>
 </head>
 <body>
-
+    
+    <div class ="effect">
     <form id="registerForm"action="registerSubmit.php" method="POST">
     
     <table>
         <tr>
             <td>
-                <input type="text" name="fname" placeholder="First name" autofocus required>
+                <input type="text" name="fname" placeholder="First name" class="form-control" autofocus required>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="text" name="lname" placeholder="Last name" required>
+                <input type="text" name="lname" placeholder="Last name" class="form-control" required>
             </td>  
         </tr>
         <tr>
             <td>
-                <input type="email" name="username" id="user_email" placeholder="Username(email)" onkeypress="EmailCheck();" required >
+                <input type="email" name="username" id="user_email" placeholder="Username(email)"  class="form-control"onkeypress="EmailCheck();" required >
             </td>
             <td>
                 <span id = "email_status"> </span>
@@ -52,17 +84,18 @@ include 'nav.php';
         </tr>
         <tr>
             <td>
-                <input type="password" name="password" placeholder="Password" required><br>
+                <input type="password" name="password" placeholder="Password" class="form-control" required><br>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="submit" value="Submit">
-                <input type="button" value="Clear" onclick="clearForm()">
+                <input class='btn btn-primary' type="submit" value="Submit">
+                <input class='btn btn-default' type="button" value="Clear" onclick="clearForm()" style="margin-left:10px;">
             </td>
         </tr>
     </table>
     </form>
+    </div>
 
 
 

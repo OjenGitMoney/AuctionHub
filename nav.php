@@ -10,9 +10,6 @@ session_start();
 
 <style>
 
-  input[name="searchterm"] { 
-  width: 450px;
-  }
 
 </style>
 </header>
@@ -43,7 +40,7 @@ session_start();
                 <li><a href="index.php">Home</a></li>
             </ul>
             <ul class="nav navbar-nav">
-              <li><a href="postitem.html/">Sell an Item</a></li>
+              <li><a href="postItem.php">Sell an Item</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
               <li><a href="myaccount.html/php"><?php echo $_SESSION['username'] ?></a></li>
@@ -54,11 +51,15 @@ session_start();
        </div>
     </div>
   </nav>
-    <ul class="search_bar">
-    <form method="post" action="search.php">
-    <input type="text" name="searchterm" placeholder="search for item..." required><input type="Submit" value="search" name="Search">
-    </form>
-    </ul>
+    <center>
+      <ul class="search_bar">
+        <form class="form-inline" method="post" action="search.php">
+    
+          <input type="text" name="searchterm"  class="form-control"  placeholder="search for item..." required style="width: 40%">
+          <input type="Submit" value="Search" name="Search" class="btn btn-info">
+        </form>
+      </ul>
+    </center>
 
     <script src="resources/jquery-1.11.3.js"></script>
     <!-- Latest compiled and minified JavaScript -->
@@ -96,11 +97,14 @@ else
     </div>
   </nav>
     <center>
-    <ul class="search_bar">
-    <form method="post" action="search.php">
-    <input type="text" name="searchterm" placeholder="search for item..." required><input type="Submit" value="search" name="Search">
-    </form>
-    </ul>
+      <ul class="search_bar">
+      <form class="form-inline" method="post" action="search.php">
+     
+        <input type="text" name="searchterm" class="form-control" placeholder="search for item..." required style="width: 40%">
+        <input type="Submit" value="Search" name="Search" class="btn btn-info">
+     
+      </form>
+      </ul>
     </center>
 
     <script src="resources/jquery-1.11.3.js"></script>

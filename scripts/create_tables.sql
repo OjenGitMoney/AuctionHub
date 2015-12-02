@@ -37,10 +37,19 @@ CREATE TABLE bids	(
 						highest_bidder VARCHAR (50),
 						end_date DATE,
 						end_time TIME,
+						date_bid_placed DATE,
+						time_bid_placed TIME, 
 						poster_email VARCHAR (50),
 						FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE
 						)^
 
+CREATE TABLE bidHisotry	(
+							item_id INT,
+							bidder_email VARCHAR (50),
+							date_bid_placed DATE,
+							time_bid_placed TIME
+							)^
+						
 CREATE TRIGGER sync 
 AFTER INSERT ON items
 
@@ -50,4 +59,15 @@ MODE DB2SQL
 
 BEGIN ATOMIC
 	INSERT INTO bids (item_id, number_of_bids, highest_bid_amount, end_date, end_time, poster_email) VALUES (newrow.id, 0, newrow.post_price, newrow.end_date, newrow.post_time, newrow.poster_email);
-END^						
+END^
+
+CREATE TRIGGER bidHisotryUpdate
+AFTER UPDATE ON bids
+
+REFERENCING NEW AS newbid
+FOR EACH ROW 
+MODE DB2SQL
+
+BEGIN ATOMIC
+	INSERT INTO bidHisotry(item_id, bidder_email, date_bid_placed, time_bid_placed) VALUES (newbid.item_id, newbid.highest_bidder, newbid.date_bid_placed, newbid.time_bid_placed);
+END^
