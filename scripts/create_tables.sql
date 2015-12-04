@@ -43,7 +43,7 @@ CREATE TABLE bids	(
 						FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE
 						)^
 
-CREATE TABLE bidHisotry	(
+CREATE TABLE bidHistory	(
 							item_id INT,
 							bidder_email VARCHAR (50),
 							date_bid_placed DATE,
@@ -69,5 +69,5 @@ FOR EACH ROW
 MODE DB2SQL
 
 BEGIN ATOMIC
-	INSERT INTO bidHisotry(item_id, bidder_email, date_bid_placed, time_bid_placed) VALUES (newbid.item_id, newbid.highest_bidder, newbid.date_bid_placed, newbid.time_bid_placed);
+	INSERT INTO bidHistory(item_id, bidder_email, date_bid_placed, time_bid_placed) VALUES (newbid.item_id, newbid.highest_bidder, newbid.date_bid_placed, newbid.time_bid_placed);
 END^
