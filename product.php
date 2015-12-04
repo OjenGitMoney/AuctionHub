@@ -135,6 +135,14 @@ include 'nav.php';
 			<h1>Description</h1>
 			Condition: <div id="bidCondition" name="CONDITION"></div>
 			<div name="DESCRIPTION"></div>
+			<div id="user" style="display: none;"><?php 
+				if(isset($_SESSION['username']))
+				{
+					echo $_SESSION['username']; 	
+				}
+				else
+					echo 'undefined';
+			?></div>
 		</section>
 		<div>
 		</body>
@@ -142,14 +150,20 @@ include 'nav.php';
 <script type = "text/javascript">
 	var clock = document.getElementById("timer");;
 	var endtime;
+	var highBid;
+	var username;
 	function getInfo(){
 		$.get(("getBids.php"), {id:<?php echo $_GET['id']; ?>}, function(data){
 			endtime = data['END_DATE'] + " " + data['END_TIME'];
+			getTimeRemaining(endtime);
 			displayTime();
 			for( i in document.getElementsByName("NUMBER_OF_BIDS"))
 				document.getElementsByName("NUMBER_OF_BIDS")[i].innerHTML = data['NUMBER_OF_BIDS'];
 			for( i in document.getElementsByName("POST_PRICE"))
-				document.getElementsByName("POST_PRICE")[i].innerHTML = data['HIGHEST_BID_AMOUNT'];
+			{
+				highBid = data['HIGHEST_BID_AMOUNT'];
+				document.getElementsByName("POST_PRICE")[i].innerHTML = highBid;
+			}
 			for( i in document.getElementsByName("POSTER_EMAIL"))
 				document.getElementsByName("POSTER_EMAIL")[i].innerHTML = data['POSTER_EMAIL'];
 		}, "json");
@@ -171,33 +185,26 @@ include 'nav.php';
 				document.getElementsByName("WINNER_EMAIL")[i].innerHTML = data['WINNER_EMAIL'];
 		}, "json");
 		
-		var username = <?php 
-			if (isset($_SESSION['username'])){
-					$username = $_SESSION['username'];
-					echo $username;
-				}
-			else{
-				echo 'undefined';
-			} 
-			?>;
-		console.log(username);
-		if(username = 'undefined')
-		{
-			document.getElementById("error").innerHTML = "You must login to bid.";	
-			document.getElementById("bidInput").disabled = true;
-		}
+		//console.log(username);
 	}
 	window.onload = getInfo;
 </script>
 
 <script>
 	function getTimeRemaining(end){
-		console.log(end);
-		var t =Date.parse(end) - Date.now();
+		//console.log(end);
+
+		var a = end.split(/[^0-9]/);
+		//for (i=0;i<a.length;i++) { alert(a[i]); }
+		var d=new Date (a[0],a[1]-1,a[2],a[3],a[4],a[5] );
+		//console.log(d);
+		var t = d - Date.now();
+		
 		var seconds = Math.floor( (t/1000) % 60 );
 		var minutes = Math.floor( (t/1000/60) % 60 );
 		var hours = Math.floor((t/(1000*60*60)%24 ));
 		var days = Math.floor( t/(1000*60*60*24) );
+		//console.log(hours);
 		return {
 			'total': t,
 			'days': days,
@@ -210,10 +217,12 @@ include 'nav.php';
 		var time = setInterval(function(){
 			var t = getTimeRemaining(endtime);
 			clock.innerHTML = t.days + 'd '+ t.hours  + 'h ' + t.minutes + 'm ' + t.seconds + 's ';
+			//console.log(t.days);
 			if(t.days > 0)
 				clock.innerHTML = t.days + 'd '+ t.hours  + 'h ' + t.minutes + 'm ' + t.seconds + 's ';
 			else
 			{
+
 				if(t.hours > 0)
 					clock.innerHTML = t.hours  + 'h ' + t.minutes + 'm ' + t.seconds + 's ';
 				else
@@ -237,23 +246,38 @@ include 'nav.php';
 	function makeBid()
 	{
 		var bid = document.getElementById("bidInput").value;
-		console.log(bid);
-		if(isNaN(bid) )
+
+		username = document.getElementById("user").innerHTML;
+		//console.log(username);
+		if(isNaN(bid) || bid == '')
 		{
 			document.getElementById("error").innerHTML = "Please enter a number.";
 		}
-		else if(username='undefined')
+		else if(username == 'undefined')
 		{
-			window.open("login.php");
+			window.open("login.php")
+		}
+		else if(bid <= highBid)
+		{
+			document.getElementById("error").innerHTML = "Your bid is too low.";	
 		}
 		else{
 			document.getElementById("error").innerHTML = "";
-			$.get("makeBid.php", {id:<?php echo $_GET['id']; ?>, bid:bid}, function(data){
+			var theTime = new Date();
+			var currentTime = theTime.getHours()+":"+theTime.getMinutes()+":"+theTime.getSeconds() ;
+			
+			var currentDate = theTime.getFullYear()+"-"+theTime.getDate()+"-"+(theTime.getMonth()+1);
+			console.log(currentTime);
+			$.get("makeBid.php", {id:<?php echo $_GET['id']; ?>, bid:bid, user:username, date:currentDate, time:currentTime}, function(data){
 					console.log(data);
 					if(data == "yay")
 					{
 						console.log("why");
 						location.reload();
+					}
+					else
+					{
+						document.getElementById("error").innerHTML = "The highest bid has changed.";
 					}
 			}, "json");
 		}
