@@ -99,14 +99,13 @@ and open the template in the editor.
                 
                 // the offset of the list, based on current page 
                 $offset = ($currentpage - 1) * $rowsperpage;
+                $variable = ($offset+$rowsperpage)-1;
 
                 //get the info from the database
                 
-               $query = "Select * from(Select * ROW_NUMBER() OVER(ORDER BY NAME DESC) AS row_number "
-                       . "from $computerUserName.items) AS emp where emp.row_number>10"
-                       . " AND emp.row_number<=20";
-     
-
+               $query = "select * from(Select ROW_NUMBER() OVER() as rn, $computerUserName.items.* FROM $computerUserName.items) where rn between $offset and $variable";
+                //$query = "Select * from $computerName.items limit".$rowsperpage."offset$offset";
+               
                $stmt = db2_prepare($connection,$query);
                 $result = db2_execute($stmt);
                
@@ -114,8 +113,8 @@ and open the template in the editor.
                    
                    while($row = db2_fetch_array($stmt)){
                        echo "<tr>";
-		       echo "<td><image src='" . $row[7] . "' width = 175 height = 175 </image></a></td>"; 
-                       echo "<td><a href=\"product.php?id=".$row[0]."\">".$row[1]."</a></td>";
+		       echo "<td><image src='" . $row[8] . "' width = 175 height = 175 </image></a></td>"; 
+                       echo "<td><a href=\"product.php?id=".$row[1]."\">".$row[2]."</a></td>";
                        echo "<td> Hello</td>";
                        echo "<td> Hello</td>";												
 		       echo "</tr>";
