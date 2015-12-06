@@ -48,8 +48,8 @@
   </nav><br><br>
 
   <?php
-  include 'connect.php';
-  $conn = db2_connect( $database , $dbusername , $dbpassword );
+  include 'config.php';
+  $conn = db2_connect( $dbname , $username , $password );
   if ($conn) {
   
      $userName = $_SESSION['username'];
@@ -58,7 +58,7 @@
 	 print ('<h2  style="font-weight: bold;  text-align: center;">Current Bidding</h2>');
 
      // Current Bid
-     $sql = "SELECT ID, IMAGE, DESCRIPTION, CONDITION FROM OWNER.ITEMS"; 
+     $sql = "SELECT ID, IMAGE, DESCRIPTION, CONDITION FROM ".$computerName.".ITEMS"; 
      $stmt = db2_prepare($conn, $sql);
      if ($stmt) {
         $result = db2_execute($stmt);
@@ -76,7 +76,7 @@
           $desc = $row[2].'<br><br>	Condition: '.$row[3].'<br>Item #'.$itemID;
 
 		  // CHECK IF I BID THIS ITEM
-          $sql2 = "SELECT ITEM_ID, BIDDER_EMAIL FROM OWNER.BIDHISTORY WHERE ITEM_ID = $itemID AND BIDDER_EMAIL = '$userName'";
+          $sql2 = "SELECT ITEM_ID, BIDDER_EMAIL FROM ".$computerName.".BIDHISTORY WHERE ITEM_ID = $itemID AND BIDDER_EMAIL = '$userName'";
           $stmt2 = db2_prepare($conn, $sql2);
           $result2 = db2_execute($stmt2);
           if (!$result2) {
@@ -92,7 +92,7 @@
           // I BID
 		  
 		  // CHECK IF ENDED
-          $sql2 = "SELECT HIGHEST_BID_AMOUNT, END_DATE, END_TIME, HIGHEST_BIDDER FROM OWNER.BIDS WHERE ITEM_ID = $itemID and CURRENT DATE <= END_DATE";
+          $sql2 = "SELECT HIGHEST_BID_AMOUNT, END_DATE, END_TIME, HIGHEST_BIDDER FROM ".$computerName.".BIDS WHERE ITEM_ID = $itemID and CURRENT DATE <= END_DATE";
           $stmt2 = db2_prepare($conn, $sql2);
           $result2 = db2_execute($stmt2);
           if (!$result2) {
@@ -166,7 +166,7 @@
 
 	 
      // Ended Auctions
-     $sql = "SELECT ID, IMAGE, DESCRIPTION, CONDITION FROM OWNER.ITEMS"; 
+     $sql = "SELECT ID, IMAGE, DESCRIPTION, CONDITION FROM ".$computerName.".ITEMS"; 
      $stmt = db2_prepare($conn, $sql);
      if ($stmt) {
         $result = db2_execute($stmt);
@@ -184,7 +184,7 @@
           $desc = $row[2].'<br><br>	Condition: '.$row[3].'<br>Item #'.$itemID;
 
 		  // CHECK IF I BID THIS ITEM
-          $sql2 = "SELECT ITEM_ID, BIDDER_EMAIL FROM OWNER.BIDHISTORY WHERE ITEM_ID = $itemID AND BIDDER_EMAIL = '$userName'";
+          $sql2 = "SELECT ITEM_ID, BIDDER_EMAIL FROM ".$computerName.".BIDHISTORY WHERE ITEM_ID = $itemID AND BIDDER_EMAIL = '$userName'";
           $stmt2 = db2_prepare($conn, $sql2);
           $result2 = db2_execute($stmt2);
           if (!$result2) {
@@ -200,7 +200,7 @@
           // I BID
 		  
 		  // CHECK IF ENDED
-          $sql2 = "SELECT HIGHEST_BID_AMOUNT, END_DATE, END_TIME, HIGHEST_BIDDER FROM OWNER.BIDS WHERE ITEM_ID = $itemID and CURRENT DATE >= END_DATE";
+          $sql2 = "SELECT HIGHEST_BID_AMOUNT, END_DATE, END_TIME, HIGHEST_BIDDER FROM ".$computerName.".BIDS WHERE ITEM_ID = $itemID and CURRENT DATE >= END_DATE";
           $stmt2 = db2_prepare($conn, $sql2);
           $result2 = db2_execute($stmt2);
           if (!$result2) {
