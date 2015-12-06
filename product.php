@@ -281,6 +281,7 @@ include 'nav.php';
 					}
 			}, "json");
 		}
+		location.reload();
 	}
 </script>
 </html>
