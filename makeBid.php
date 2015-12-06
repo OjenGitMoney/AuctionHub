@@ -1,11 +1,9 @@
 
 <?php
-//phpinfo();
-//exit;
 
-include 'connect.php';
+include 'config.php';
 	try{
-		$conn = db2_connect($database, $dbusername, $dbpassword);
+		$conn = db2_connect($dbname, $username, $password);
 	}
 	catch( Exception $e ){
 		echo "Exception: ". $e->getMessage();
@@ -15,8 +13,8 @@ include 'connect.php';
 	$bid = $_GET['bid'];
 	if( $conn ){
 		$sql = "select ITEM_ID, NUMBER_OF_BIDS, HIGHEST_BID_AMOUNT, HIGHEST_BIDDER, END_DATE, END_TIME, POSTER_EMAIL
-		from ".$computerUserName.".bids
-		where ITEM_ID= $id";
+		from ".$computerName.".bids
+		where ITEM_ID= ".$id." ";
 		$stmt = db2_prepare($conn, $sql);
 		
 		if( $stmt)
@@ -32,35 +30,35 @@ include 'connect.php';
 		if($item['HIGHEST_BID_AMOUNT'] < $bid)
 		{
 			// INSERTS THE HIGHEST BIDDER
-			$sql = "UPDATE bids 
+			$sql = "UPDATE ".$computerName.".bids 
 			SET HIGHEST_BIDDER = '".$user."'
-			where ITEM_ID = $id;";
+			where ITEM_ID = ".$id." ";
 			$stmt = db2_prepare($conn, $sql);
 			if( $stmt)
 				$result = db2_execute($stmt);
 			
 			//INCREASES THE NUMBER OF BIDS
-			$sql = "UPDATE bids
+			$sql = "UPDATE ".$computerName.".bids
 			SET NUMBER_OF_BIDS = NUMBER_OF_BIDS + 1
-			where ITEM_ID = $id;
+			where ITEM_ID = ".$id."
 			";
 			$stmt = db2_prepare($conn, $sql);
 			if( $stmt)
 				$result = db2_execute($stmt);
 
 			//SETS THE HIGHEST BID SO FAR
-			$sql = "UPDATE bids
+			$sql = "UPDATE ".$computerName.".bids
 			SET HIGHEST_BID_AMOUNT = $bid
-			where ITEM_ID = $id;";
+			where ITEM_ID = ".$id." ";
 			$stmt = db2_prepare($conn, $sql);
 			if( $stmt)
 				$result = db2_execute($stmt);
 
 			//INSERT THE DATE THIS BID WAS PLACED
 			$date = $_GET['date'];
-			$sql = "UPDATE bids
+			$sql = "UPDATE ".$computerName.".bids
 			SET DATE_BID_PLACED = '".$date."'
-			where ITEM_ID = $id;";
+			where ITEM_ID = ".$id." ";
 			$stmt = db2_prepare($conn, $sql);
 			if( $stmt)
 				$result = db2_execute($stmt);
@@ -68,9 +66,9 @@ include 'connect.php';
 
 			//INSERT THE TIME THIS BID WAS PLACED
 			$time = $_GET['time'];
-			$sql = "UPDATE bids
+			$sql = "UPDATE ".$computerName.".bids
 			SET TIME_BID_PLACED = '".$time."'
-			where ITEM_ID = $id;";
+			where ITEM_ID = ".$id." ";
 			$stmt = db2_prepare($conn, $sql);
 			if( $stmt)
 				$result = db2_execute($stmt);

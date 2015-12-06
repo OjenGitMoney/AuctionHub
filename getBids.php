@@ -1,11 +1,11 @@
 
 <?php
-//phpinfo();
-//exit;
 
-include 'connect.php';
+
+include ('config.php');
+
 	try{
-		$conn = db2_connect($database, $dbusername, $dbpassword);
+		$conn = db2_connect($dbname, $username, $password);
 	}
 	catch( Exception $e ){
 		echo "Exception: ". $e->getMessage();
@@ -13,8 +13,8 @@ include 'connect.php';
 	$id = $_GET['id'];
 	if( $conn ){
 		$sql = "select ITEM_ID, NUMBER_OF_BIDS, HIGHEST_BID_AMOUNT, HIGHEST_BIDDER, END_DATE, END_TIME, POSTER_EMAIL
-		from ".$computerUserName.".bids
-		where ITEM_ID= $id";
+		from ".$computerName.".BIDS
+		where ITEM_ID= ".$id." ";
 		$stmt = db2_prepare($conn, $sql);
 		
 		if( $stmt)
