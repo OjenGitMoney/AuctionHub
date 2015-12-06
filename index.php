@@ -131,7 +131,7 @@ and open the template in the editor.
                 if ($stmt) {
                     while ($row = db2_fetch_array($stmt)) {
                         //$query2 = "select * from(Select ROW_NUMBER() OVER() as rn, $computerUserName.bids.* FROM $computerUserName.bids) where rn between $offset and $variable";
-                        $query2 = "Select highest_bid_amount from $computerUserName.bids where item_id =".$row[1]." ";
+                        $query2 = "Select highest_bid_amount, number_of_bids from $computerUserName.bids where item_id =".$row[1];
                         $stmt2 = db2_prepare($connection, $query2);
                         $result2 = db2_execute($stmt2);
 
@@ -139,8 +139,8 @@ and open the template in the editor.
                         echo "<tr>";
                         echo "<td><image src='" . $row[8] . "' width = 175 height = 175 </image></a></td>";
                         echo "<td><a href=\"product.php?id=" . $row[1] . "\">" . $row[2] . "</a></td>";
-                        //echo "<td>".$row2[0]."</td>";
-                        //echo "<td>".$row2[4]."</td>";
+                        echo "<td>".$row2[0]."</td>";
+                        echo "<td>".$row2[1]."</td>";
                         echo "</tr>";
                       
                     }

@@ -21,6 +21,7 @@ session_start();
     <html>
     
     <body>
+        
     <nav role="navigation" class="navbar navbar-default navbar-static-top navbar-inverse">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
