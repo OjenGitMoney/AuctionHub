@@ -75,7 +75,9 @@ session_start();
                 $result = db2_execute($stmt);
 
                 if($result){
-                    echo "__Your Item Has Been Posted__";
+                    
+                    echo "Item sucessfully Posted";
+                    header('Location: myAccount.php');
                     db2_close($conn);
                 }
                 else {

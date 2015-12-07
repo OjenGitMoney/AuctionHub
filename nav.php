@@ -8,6 +8,8 @@ session_start();
 <!-- Optional theme -->
 <link rel="stylesheet" href="resources/bootstrap-3.3.5/css/bootstrap-theme.min.css"/>
 
+
+        <link rel="stylesheet" type="text/css" href="resources/styleSheet.css">
 <style>
 
 #navbarCollapse{

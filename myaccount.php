@@ -84,10 +84,10 @@
           $desc = $row[2].'<br><br>	Condition: '.$row[3].'<br>Item #'.$itemID;
 		  
 		  if ( strcmp($highestBidder, $userName) == 0) {
-		     $bidStatus = 'High Bidder';
-			 $bidStatusColor = 'color: rgb(0,255,0)';
+		     $bidStatus = 'You are the Highest Bidder';
+			 $bidStatusColor = 'color: rgb(71,206,142)';
 		  } else {
-		     $bidStatus = 'Not High Bidder';
+		     $bidStatus = 'You are NOT the highest bidder';
 			 $bidStatusColor = 'color: rgb(255,0,0)';
 		  }
           print ('<style type="text/css">');
@@ -105,7 +105,7 @@
           print ('    <td  style="font-weight: bold; width: 20%; text-align: center;">Picture</td>');
           print ('    <td  style="font-weight: bold; text-align: center; vertical-align: middle; width: 50%; height: 18px;">Product Description</td>');
           print ('    <td  style="font-weight: bold; text-align: center; width: 10%; vertical-align: middle;">End Time</td>');
-          print ('    <td  style="font-weight: bold; text-align: center; width: 20%; vertical-align: middle;">&nbsp;High Bid</td>');
+          print ('    <td  style="font-weight: bold; text-align: center; width: 20%; vertical-align: middle;">&nbsp;Current Price</td>');
           print ('  </tr>');
           print ('  <tr>');
           print ('    <td  style="width: 20%; text-align: center;">');
@@ -192,10 +192,10 @@
           $desc = $row[2].'<br><br>	Condition: '.$row[3].'<br>Item #'.$itemID;
 		  
 		  if ( strcmp($highestBidder, $userName) == 0) {
-		     $bidStatus = 'Winning Bidder';
-			 $bidStatusColor = 'color: rgb(0,255,0)';
+		     $bidStatus = 'Won this Item';
+			 $bidStatusColor = 'color: rgb(71,206,142)';
 		  } else {
-		     $bidStatus = 'Lossing Bidder';
+		     $bidStatus = 'Lost this Item';
 			 $bidStatusColor = 'color: rgb(255,0,0)';
 		  }
           print ('<style type="text/css">');
@@ -213,7 +213,7 @@
           print ('    <td  style="font-weight: bold; width: 20%; text-align: center;">Picture</td>');
           print ('    <td  style="font-weight: bold; text-align: center; vertical-align: middle; width: 50%; height: 18px;">Product Description</td>');
           print ('    <td  style="font-weight: bold; text-align: center; width: 10%; vertical-align: middle;">End Time</td>');
-          print ('    <td  style="font-weight: bold; text-align: center; width: 20%; vertical-align: middle;">&nbsp;High Bid</td>');
+          print ('    <td  style="font-weight: bold; text-align: center; width: 20%; vertical-align: middle;">&nbsp;Price</td>');
           print ('  </tr>');
           print ('  <tr>');
           print ('    <td  style="width: 20%; text-align: center;">');

@@ -272,16 +272,17 @@ include 'nav.php';
 					console.log(data);
 					if(data == "yay")
 					{
-						console.log("why");
-						location.reload();
+						location.reload(true);
 					}
 					else
 					{
 						document.getElementById("error").innerHTML = "The highest bid has changed.";
 					}
+
 			}, "json");
 		}
-		location.reload();
+
+		window.setTimeout(function(){location.reload()},1000);
 	}
 </script>
 </html>

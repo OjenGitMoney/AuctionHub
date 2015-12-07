@@ -11,11 +11,10 @@ include 'config.php';
 	$id = $_GET['id'];
 	if( $conn ){
 		$sql = "select id, name , DESCRIPTION, POST_PRICE, POST_DATE, POST_TIME, IMAGE, CONDITION
-		from ".$computerName.".ITEMS
-		where id= ".$id." ";
+		from ".$computerName.".items
+		where id= ".$id.";";
 		$stmt = db2_prepare($conn, $sql);
-		
-		if( $stmt)
+		if($stmt)
 		{
 			$result = db2_execute($stmt);
 		}

@@ -28,6 +28,7 @@
     		border-radius: 10px;
     		left:30%;
     		top:15%;
+    		background-color: #FFFFFF;
     		
 		}
 		.effect:before, .effect:after

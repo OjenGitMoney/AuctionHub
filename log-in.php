@@ -2,14 +2,14 @@
 session_unset();
 error_reporting(0);
 session_start();
-include 'connect.php';
+include 'config.php';
 	if( isset($_POST['userName']) && isset($_POST['password']) ){
 			
 			$usernameEntered = $_POST['userName'];
 			$passwordEntered = $_POST['password'];
-				$conn = db2_connect( $database , $dbusername , $dbpassword );
+				$conn = db2_connect( $dbname , $username , $password );
 								
-				$sqlquery = "SELECT password FROM OWNER.USERS WHERE email = '$usernameEntered' ";
+				$sqlquery = "SELECT password FROM ".$computerName.".USERS WHERE email = '$usernameEntered' ";
 				$stmt = db2_prepare($conn, $sqlquery);
             	
             	if ($stmt) {       
