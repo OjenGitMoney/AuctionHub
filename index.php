@@ -27,6 +27,7 @@ and open the template in the editor.
             .tfclear{
                 clear:both;
             }
+           
 
         </style>
     </head>
@@ -107,7 +108,7 @@ and open the template in the editor.
 
                                 $row2 = db2_fetch_array($stmt2);
                                 echo "<tr>";
-                                echo "<td><image src='" . $row[8] . "' width = 175 height = 175 </image></a></td>";
+                                echo "<td align:center><image src='" . $row[8] . "' width = 175 height = 175 </image></a></td>";
                                 echo "<td><a href=\"product.php?id=" . $row[1] . "\"class='btn btn-info' role='button'>" . $row[2] . "</a></td>";
                                 echo "<td>" . $row2[0] . "</td>";
                                 echo "<td>" . $row2[1] . "</td>";
@@ -181,8 +182,7 @@ and open the template in the editor.
                                 /*                                 * **** end build pagination links ***** */
                                 ?>
                                 </table>
-                                <?php
-                                ?>
+                             <button onclick="$('#datatable').dynatable();">DYNATABLE</button>  
                             </ul>
 
                         </nav>
