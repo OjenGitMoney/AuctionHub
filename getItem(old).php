@@ -16,7 +16,7 @@ catch( Exception $e ){
 
 if( $conn ){
 	$sql = "select id, name , DESCRIPTION, POST_PRICE, POST_DATE, POST_TIME, END_DATE, NUMBER_OF_BIDS, IMAGE, CONDITION, POSTER_EMAIL, WINNER_EMAIL
-	from items
+	from ".$computerUserName.".items
 	where id=100";
 	$stmt = db2_prepare($conn, $sql);
 	

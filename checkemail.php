@@ -1,16 +1,11 @@
 <?php
-
-include 'connect.php';
-
+include 'config.php';
 if( isset($_POST['username'])){
-
-	$conn = db2_connect( $database , $dbusername , $dbpassword );
+	$conn = db2_connect( $dbname , $username , $password );
 	
 	if ($conn){
-
 		$userName = $_POST['username'];
-
-		$userNameQuery = "SELECT COUNT(*) FROM ".$computerUserName.".USERS WHERE email = '$userName' ";
+		$userNameQuery = "SELECT COUNT(*) FROM ".$computerName.".USERS WHERE email = '$userName' ";
 		
 		$stmt = db2_prepare($conn, $userNameQuery);
             
@@ -19,9 +14,7 @@ if( isset($_POST['username'])){
                         $result = db2_execute($stmt);
                         
                         if ($result){
-
                             $username_result = db2_fetch_array($stmt);
-
                             if($username_result[0] == '0'){
                                 echo 'Username is available';
                             }
@@ -33,11 +26,9 @@ if( isset($_POST['username'])){
                         	db2_stmt_errormsg($stmt);
                         	db2_close($conn);
                         }
-
         	}
         		
 	}
 	
 }
-
 ?>
