@@ -9,6 +9,12 @@ session_start();
 <link rel="stylesheet" href="resources/bootstrap-3.3.5/css/bootstrap-theme.min.css"/>
 
 <style>
+
+#navbarCollapse{
+	margin-bottom: 25px;
+	font-size: 150%;
+}
+
 </style>
 </header>
 
@@ -23,8 +29,14 @@ session_start();
     <body>
         
     <nav role="navigation" class="navbar navbar-default navbar-static-top navbar-inverse">
+    	
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
+
+		
+		
+	
+
       <div class="navbar-header">
           <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
             <span class="sr-only">Toggle navigation</span>
@@ -34,7 +46,16 @@ session_start();
         </button>
       </div>
     <!-- Collection of nav links and other content for toggling //   class="active"  -->
-      <div id="navbarCollapse" class="collapse navbar-collapse">
+    	
+    	
+    <a href="index.php"><img src="resources/logo.png" alt=" logo" width="100" height="100" style="float:left"> </a>
+	
+      <div id="navbarCollapse" class="collapse navbar-collapse" style="float:right">
+      <!-- 
+      		<ul class="nav navbar-nav navbar-left">
+                <a href="index.php"><img src="resources/logo.png" alt=" logo " width="100" height="100"> </a>
+            </ul>
+		-->
           <ul class="nav navbar-nav">
                 <li><a href="index.php">Home</a></li>
             </ul>
@@ -84,8 +105,12 @@ else
             <span class="icon-bar"></span>
         </button>
       </div>
+
+      <a href="index.php"><img src="resources/logo.png" alt=" logo" width="100" height="100" style="float:left"> </a>
+
     <!-- Collection of nav links and other content for toggling //   class="active"  -->
-      <div id="navbarCollapse" class="collapse navbar-collapse">
+
+      <div id="navbarCollapse" class="collapse navbar-collapse"  style="float:right">
           <ul class="nav navbar-nav">
                 <li><a href="index.php">Home</a></li>
             </ul>
