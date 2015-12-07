@@ -1,4 +1,5 @@
 
+
 <html>
   <head>
     <title>Post Item to sell</title>
@@ -9,10 +10,12 @@
 
 
     <style type ='text/css'>
+
     input[name=itemDescription]{
        
       text-align: top;
     }
+
     #itemPrice{
        
       width: 100px;
@@ -21,6 +24,7 @@
     table td {
       padding: 10px;
     }
+
     #clear{
       margin-left: 2px;
     }
@@ -88,7 +92,7 @@
               Days to put for Auction :
             </TD>
             <TD>
-              <select class="form-control">
+              <select class="form-control" name='time'>
                 <option name='time' value='1'>1</option>
                 <option name='time' value='2'>2</option>
                 <option name='time' value='5'>5</option>
@@ -102,7 +106,7 @@
               Upload Image :
             </TD>
             <TD>
-                <input type="file" name="fileToUpload" id="fileToUpload" multiple>
+                <input type="file" name="img_upload" id="img_upload" multiple>
               
             </TD>
           </TR>
@@ -120,6 +124,7 @@
     function clearForm(){
     document.getElementById('postItemForm').reset();
     }
+
     </script>
     <script src="resources/jquery-1.11.3.js"></script>
     <!-- Latest compiled and minified JavaScript -->

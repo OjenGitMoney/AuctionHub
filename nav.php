@@ -42,7 +42,7 @@ session_start();
               <li><a href="postItem.php">Sell an Item</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="myaccount.html/php"><?php echo $_SESSION['username'] ?></a></li>
+              <li><a href="myaccount.php"><?php echo $_SESSION['username'] ?></a></li>
           </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="logout.php">Log-Out</a></li>

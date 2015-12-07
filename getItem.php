@@ -1,11 +1,8 @@
 
 <?php
-//phpinfo();
-//exit;
-
-include 'connect.php';
+include 'config.php';
 	try{
-		$conn = db2_connect($database, $dbusername, $dbpassword);
+		$conn = db2_connect($dbname, $username, $password);
 	}
 	catch( Exception $e ){
 		echo "Exception: ". $e->getMessage();
@@ -13,8 +10,8 @@ include 'connect.php';
 	$id = $_GET['id'];
 	if( $conn ){
 		$sql = "select id, name , DESCRIPTION, POST_PRICE, POST_DATE, POST_TIME, IMAGE, CONDITION
-		from ".$computerUserName.".items
-		where id= $id";
+		from ".$computerName.".ITEMS
+		where id= ".$id." ";
 		$stmt = db2_prepare($conn, $sql);
 		
 		if( $stmt)
@@ -28,9 +25,7 @@ include 'connect.php';
 		$item = array();
 		$item = db2_fetch_assoc($stmt);
 		$json = json_encode($item);
-
 			header('Content-type: application/json');
-
 		echo $json;
 		db2_close($conn);
 	}

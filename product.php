@@ -1,7 +1,6 @@
 
 <?php
 include 'nav.php';
-
 ?>
 <html>
 
@@ -23,7 +22,6 @@ include 'nav.php';
 		//background-color:lightgrey;
 		//border-right: 2px solid grey;
 	}
-
 	#productimage{
 		border: 3px solid #f2f2f2;
 		min-height:200px;
@@ -31,7 +29,6 @@ include 'nav.php';
 		width: 97%;
 		height: auto;
 	}
-
 	#infosection{
 		font-family: 'Roboto' sans-serif;
 		padding: 5px;
@@ -42,7 +39,6 @@ include 'nav.php';
 		height: 100%;
 		//background-color:#ebebe0;		
 	}
-
 	#infoTitle{
 		text-transform: uppercase;
 		font-size: 32px;
@@ -167,7 +163,6 @@ include 'nav.php';
 			for( i in document.getElementsByName("POSTER_EMAIL"))
 				document.getElementsByName("POSTER_EMAIL")[i].innerHTML = data['POSTER_EMAIL'];
 		}, "json");
-
 		$.get(("getItem.php"), {id:<?php echo $_GET['id']; ?>}, function(data){
 			for( i in document.getElementsByName("name"))
 				document.getElementsByName("name")[i].innerHTML = data['NAME'];
@@ -193,7 +188,6 @@ include 'nav.php';
 <script>
 	function getTimeRemaining(end){
 		//console.log(end);
-
 		var a = end.split(/[^0-9]/);
 		//for (i=0;i<a.length;i++) { alert(a[i]); }
 		var d=new Date (a[0],a[1]-1,a[2],a[3],a[4],a[5] );
@@ -222,7 +216,6 @@ include 'nav.php';
 				clock.innerHTML = t.days + 'd '+ t.hours  + 'h ' + t.minutes + 'm ' + t.seconds + 's ';
 			else
 			{
-
 				if(t.hours > 0)
 					clock.innerHTML = t.hours  + 'h ' + t.minutes + 'm ' + t.seconds + 's ';
 				else
@@ -246,7 +239,6 @@ include 'nav.php';
 	function makeBid()
 	{
 		var bid = document.getElementById("bidInput").value;
-
 		username = document.getElementById("user").innerHTML;
 		//console.log(username);
 		if(isNaN(bid) || bid == '')
@@ -281,6 +273,7 @@ include 'nav.php';
 					}
 			}, "json");
 		}
+		location.reload();
 	}
 </script>
 </html>
