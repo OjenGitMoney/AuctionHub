@@ -39,9 +39,7 @@
                 </tr>
                 <?php
                 
-                $searchedItem = $_POST['searchterm'];
-                trim($searchedItem);
-                $searchedItem = stripslashes($searchedItem);
+               
                 
                 //****************************************************************************************
                 //THIS IS THE NEW STUFF REGARDING FILTERING
@@ -50,6 +48,10 @@
                   //  $query = "Select * from ".$computerUserName.".items ORDER BY name ASC";
                 //}
                 //****************************************************************************************
+               
+                $searchedItem = $_POST['searchterm'];
+                trim($searchedItem);
+                $searchedItem = stripslashes($searchedItem);
                 $query = "Select * from ".$computerUserName.".items where name='" . $searchedItem . "'";
                 $stmt = db2_prepare($connection, $query);
                 $result = db2_execute($stmt);

@@ -91,14 +91,31 @@ and open the template in the editor.
                         $offset = ($currentpage - 1) * $rowsperpage;
                         $variable = ($offset + $rowsperpage) - 1;
 
-                        //get the info from the database
+                        //FILTERATION
+                        if(isset($_POST['select_name'])) {
+                            if($_POST['select_name'] == 'plowest'){
+                                 $query = "select * from(Select ROW_NUMBER() OVER(ORDER BY POST_PRICE ASC) as rn, $computerUserName.items.* FROM $computerUserName.items) where rn between $offset and $variable";
+                            }
+                            else if($_POST['select_name'] == 'phighest'){
+                               $query = "select * from(Select ROW_NUMBER() OVER(ORDER BY POST_PRICE DESC) as rn, $computerUserName.items.* FROM $computerUserName.items) where rn between $offset and $variable";
+                            }
+                            else if($_POST['select_name'] == 'endingsoon'){
+                               $query = "select * from(Select ROW_NUMBER() OVER(ORDER BY END_DATE ASC) as rn, $computerUserName.items.* FROM $computerUserName.items) where rn between $offset and $variable";
+                            }
+                            else if($_POST['select_name'] == 'newlylisted'){
+                               $query = "select * from(Select ROW_NUMBER() OVER(ORDER BY END_DATE DESC) as rn, $computerUserName.items.* FROM $computerUserName.items) where rn between $offset and $variable";
+                            }
+                            else{
+                             $query = "select * from(Select ROW_NUMBER() OVER() as rn, $computerUserName.items.* FROM $computerUserName.items) where rn between $offset and $variable";
 
+                            }
+                        }
+                        //IF NOT FILTER IS SELECTED
+                        else{
                         $query = "select * from(Select ROW_NUMBER() OVER() as rn, $computerUserName.items.* FROM $computerUserName.items) where rn between $offset and $variable";
-                        //$query = "Select * from $computerName.items limit".$rowsperpage."offset$offset";
+                        }                        
                         $stmt = db2_prepare($connection, $query);
-                        //$stmt2 = db2_prepare($connection, $query2);
                         $result = db2_execute($stmt);
-                        //$result2 = db2_execute($stmt2);
                         if ($stmt) {
                             while ($row = db2_fetch_array($stmt)) {
                                 //$query2 = "select * from(Select ROW_NUMBER() OVER() as rn, $computerUserName.bids.* FROM $computerUserName.bids) where rn between $offset and $variable";
@@ -123,20 +140,20 @@ and open the template in the editor.
 
                         //if not on page 1, dont show back links
                         ?>
-                        <nav>
-                            <form action ="search.php" method ="post">
+                        
+                        <!--drop down menu-->
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='post' name='form_filter' >
                                     Filter By:
-                                    <select name ="Filter">
-                                        <option>...</option>
+                                    <select name ="select_name">
+                                        <option value = "default">...</option>
                                         <option value = "plowest">Price Lowest</option>
                                         <option value = "phighest">Price Highest</option>
                                         <option value ="endingsoon">Ending Soon</option>
-                                        <option value = "newlist">Newly Listed</option>
-
+                                        <option value = "newlylisted">Newly Listed</option>
                                     </select>
-                                <div id="results"></div>
+                                    <input type='submit' value = 'Filter'>
                             </form>
-                        </nav>
+                        
                         <nav>
                             <ul class="pagination">
                                 <?php
@@ -182,7 +199,6 @@ and open the template in the editor.
                                 /*                                 * **** end build pagination links ***** */
                                 ?>
                                 </table>
-                             <button onclick="$('#datatable').dynatable();">DYNATABLE</button>  
                             </ul>
 
                         </nav>
