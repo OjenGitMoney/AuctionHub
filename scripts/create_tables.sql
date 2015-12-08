@@ -62,7 +62,7 @@ BEGIN ATOMIC
 	INSERT INTO bids (item_id, number_of_bids, highest_bid_amount, end_date, end_time, poster_email) VALUES (newrow.id, 0, newrow.post_price, newrow.end_date, newrow.post_time, newrow.poster_email);
 END^
 
-CREATE TRIGGER bidHisotryUpdate
+CREATE TRIGGER bidHistoryUpdate
 AFTER UPDATE ON bids
 
 REFERENCING NEW AS newbid

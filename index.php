@@ -19,6 +19,8 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link rel="stylesheet" type="text/css" href="resources/bootstrap-select/dist/css/bootstrap-select.min.css">
+        
         <style type="text/css">
             /* Fixes submit button height problem in Firefox */
             .tfbutton::-moz-focus-inner {
@@ -28,16 +30,23 @@ and open the template in the editor.
                 clear:both;
             }
 
-            #tfheader{
+            #container{
                 padding-left: 15px;
                 padding-right: 15px;
+            }
+            
+            .form-control{
+                width : 15em;
             }
             #datatable{
                 background-color: #FFFFFF;
             }
+
+
         </style>
 
         <script type="text/javascript" src="resources/jquery-1.11.3.js"></script>
+        <script type="text/javascript" src="resources/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 
     </head>
     <body>
@@ -45,7 +54,7 @@ and open the template in the editor.
         <!-- HTML for SEARCH BAR -->
 
 
-        <div id="tfheader">
+        <div id="container">
 
 
 
@@ -97,14 +106,34 @@ and open the template in the editor.
                         $offset = ($currentpage - 1) * $rowsperpage;
                         $variable = ($offset + $rowsperpage) - 1;
 
-                        //get the info from the database
 
+
+
+                        //FILTERATION
+                        if(isset($_POST['select_name'])) {
+                            if($_POST['select_name'] == 'plowest'){
+                                 $query = "select * from(Select ROW_NUMBER() OVER(ORDER BY POST_PRICE ASC) as rn, $computerName.items.* FROM $computerName.items) where rn between $offset and $variable";
+                            }
+                            else if($_POST['select_name'] == 'phighest'){
+                               $query = "select * from(Select ROW_NUMBER() OVER(ORDER BY POST_PRICE DESC) as rn, $computerName.items.* FROM $computerName.items) where rn between $offset and $variable";
+                            }
+                            else if($_POST['select_name'] == 'endingsoon'){
+                               $query = "select * from(Select ROW_NUMBER() OVER(ORDER BY END_DATE ASC) as rn, $computerName.items.* FROM $computerName.items) where rn between $offset and $variable";
+                            }
+                            else if($_POST['select_name'] == 'newlylisted'){
+                               $query = "select * from(Select ROW_NUMBER() OVER(ORDER BY END_DATE DESC) as rn, $computerName.items.* FROM $computerName.items) where rn between $offset and $variable";
+                            }
+                            else{
+                             $query = "select * from(Select ROW_NUMBER() OVER() as rn, $computerName.items.* FROM $computerName.items) where rn between $offset and $variable";
+
+                            }
+                        }
+                        //IF NOT FILTER IS SELECTED
+                        else{
                         $query = "select * from(Select ROW_NUMBER() OVER() as rn, $computerName.items.* FROM $computerName.items) where rn between $offset and $variable";
-                        //$query = "Select * from $computerName.items limit".$rowsperpage."offset$offset";
+                        }                        
                         $stmt = db2_prepare($connection, $query);
-                        //$stmt2 = db2_prepare($connection, $query2);
                         $result = db2_execute($stmt);
-                        //$result2 = db2_execute($stmt2);
                         if ($stmt) {
                             while ($row = db2_fetch_array($stmt)) {
                                 //$query2 = "select * from(Select ROW_NUMBER() OVER() as rn, $computerName.bids.* FROM $computerName.bids) where rn between $offset and $variable";
@@ -114,8 +143,8 @@ and open the template in the editor.
 
                                 $row2 = db2_fetch_array($stmt2);
                                 echo "<tr>";
-                                echo "<td><center><image src='" . $row[8] . "' width = 175 height = 175 </image></a></center></td>";
-                                echo "<td><center><a href=\"product.php?id=" . $row[1] . "\">" . $row[2] . "</a><center></td>";
+                                echo "<td><center><a href=\"product.php?id=" . $row[1] . "\"><image src='" . $row[8] . "' width = 175 height = 175 </image></a></center></td>";
+                                echo "<td><center><a href=\"product.php?id=" . $row[1] . "\">" . $row[2] . "</a></center></td>";
                                 echo "<td>" . $row2[0] . "</td>";
                                 echo "<td>" . $row2[1] . "</td>";
                                 echo "</tr>";
@@ -129,20 +158,20 @@ and open the template in the editor.
 
                         //if not on page 1, dont show back links
                         ?>
-                        <nav>
-                            <form action ="search.php" method ="post">
+                        
+                        <!--drop down menu-->
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='post' name='form_filter' >
                                     Filter By:
-                                    <select name ="Filter">
-                                        <option>...</option>
+                                    <select name ="select_name" class="form-control">
+                                        <option value = "default">...</option>
                                         <option value = "plowest">Price Lowest</option>
                                         <option value = "phighest">Price Highest</option>
                                         <option value ="endingsoon">Ending Soon</option>
-                                        <option value = "newlist">Newly Listed</option>
-
+                                        <option value = "newlylisted">Newly Listed</option>
                                     </select>
-                                <div id="results"></div>
+                                    <input type='submit' value = 'Filter'>
                             </form>
-                        </nav>
+
                         <nav>
                             <ul class="pagination">
                                 <?php
@@ -193,8 +222,15 @@ and open the template in the editor.
                             </ul>
 
                         </nav>
-                        <div class="tfclear"></div>
+                        
                         </div>
                         
-                        </body>
-                        </html>
+                        <script type="text/javascript">
+                            
+                            $(function() {
+                                //$('.selectpicker').selectpicker();
+                            });
+
+                        </script>
+    </body>
+</html>
