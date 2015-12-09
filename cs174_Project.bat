@@ -10,11 +10,10 @@ DB2 -td"^" -f scripts/create_tables.sql
 DB2 -td"^" -f scripts/insert_all_items.sql
 DB2 -td"^" -f scripts/insert_all_users.sql
 
-<<<<<<< HEAD
-start index.php
-=======
-rem start index.php
->>>>>>> refs/remotes/origin/master
+
+start chrome http://localhost/AuctionHub/index.php
+
+start firefox http://localhost/AuctionHub/index.php
 
 
 
